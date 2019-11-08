@@ -6,6 +6,11 @@ function Person(props){
     </div>
   ); 
 }
+var app = (
+  <div>
+    <Person name='Lauren' status='Presant!'/>
+    <Person name='Max' status='Here!'/>
+  </div>
+);
 
-ReactDOM.render(<Person name='Lauren' status='Presant!'/>, document.querySelector('#p1'));
-ReactDOM.render(<Person name='Max' status='Here!'/>, document.querySelector('#p2'));
+ReactDOM.render(app, document.querySelector('#app'));
