@@ -1,6 +1,6 @@
 function Person(){
     return(
-      <div class='person'>
+      <div className='person'>
         <h1>Lauren</h1>
         <p>Presant!</p>
       </div>
