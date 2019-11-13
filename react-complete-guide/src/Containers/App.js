@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 // import React, { useState } from 'react';
 import './App.css';
-import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
-
-const StyledButton = styled.button`
-  background-color: ${props => props.alt ? 'red' : 'green'};
-  font: inherit;
-  color: white;
-  border: 1px soild blue;
-  padding: 8px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-    color: black;
-
-  }
-`;
+import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -68,42 +51,20 @@ class App extends Component {
     if (this.state.showPersons){
       persons = (
         <div>
-          {this.state.persons.map((person, index) => {
-            return <Person 
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangeHandler(event, person.id)}/>
-          })}
+          <Persons
+              persons={this.state.persons}
+              clicked={this.deletePersonHandler}
+              changed={this.nameChangeHandler} />
         </div>
       );
     }
 
-    let classes = [];
-    if(this.state.persons.length <= 2) {
-      classes.push('red');
-    }
-    if (this.state.persons.length <= 1) {
-      classes.push('bold');
-    }
-
     return (
       <div className="App">
-        <h1>Hey! I'm a React App!!</h1>
-        <p className={classes.join(' ')}>This is really working!</p><br/>
-
-        {/* <UserInput 
-          changed={this.usernameChangedHandler}
-          currentName={this.state.user[0].username}/>
-        <UserOutput userName={this.state.user[0].username}/>
-        <UserOutput userName={this.state.user[0].username}/>
-        <UserOutput userName="LNPappas"/> */}
-
-        <StyledButton
-          alt={this.state.showPersons}
-          onClick={this.togglePersonHandler}>Show Name
-        </StyledButton>
+        <Cockpit 
+          showPersons={this.state.showPersons} 
+          persons={this.state.persons}
+          clicked={this.state.togglePersonHandler}/>
         {persons}
       </div> 
     );
