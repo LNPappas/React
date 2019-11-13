@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
 // import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput';
 
-class App extends Component {
+const StyledButton = styled.button`
+  background-color: ${props => props.alt ? 'red' : 'green'};
+  font: inherit;
+  color: white;
+  border: 1px soild blue;
+  padding: 8px;
+  cursor: pointer;
 
+  &:hover {
+    background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+    color: black;
+
+  }
+`;
+
+class App extends Component {
   state = {
     user: [{username: 'None'}],
     persons: [
@@ -49,16 +64,6 @@ class App extends Component {
   }
 
   render() {
-    // style for switch name button
-    const style = {
-      backgroundColor: 'black',
-      font: 'inherit',
-      color: 'white',
-      border: '1px soild blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
     let persons = null;
     if (this.state.showPersons){
       persons = (
@@ -75,21 +80,30 @@ class App extends Component {
       );
     }
 
+    let classes = [];
+    if(this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
+    }
+
     return (
       <div className="App">
         <h1>Hey! I'm a React App!!</h1>
+        <p className={classes.join(' ')}>This is really working!</p><br/>
 
-        <UserInput 
+        {/* <UserInput 
           changed={this.usernameChangedHandler}
           currentName={this.state.user[0].username}/>
         <UserOutput userName={this.state.user[0].username}/>
         <UserOutput userName={this.state.user[0].username}/>
-        <UserOutput userName="LNPappas"/>
+        <UserOutput userName="LNPappas"/> */}
 
-        <button 
-          style={style}
+        <StyledButton
+          alt={this.state.showPersons}
           onClick={this.togglePersonHandler}>Show Name
-        </button>
+        </StyledButton>
         {persons}
       </div> 
     );

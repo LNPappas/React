@@ -2,7 +2,7 @@ import React from 'react';
 
 const userInput = (props) => {
     const box = {
-        border: '10px dotted green'
+        border: '3px solid blue'
       }
 
     return <input 
